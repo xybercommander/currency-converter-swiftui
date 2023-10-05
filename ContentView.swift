@@ -10,12 +10,14 @@ import SwiftUI
 struct ContentView: View {
     @State var topToBottom: Bool = true
     @State var rotationAngle: Double = 0
+    @State var topValue: Double = 0
+    @State var bottomValue: Double = 0
     
     var body: some View {
         ZStack {
             VStack {
-                TopView()
-                BottomView()
+                TopView(topToBottom: $topToBottom, rotationAngle: $rotationAngle)
+                BottomView(topToBottom: $topToBottom, rotationAngle: $rotationAngle)
             }
             
             ZStack {
@@ -41,7 +43,7 @@ struct ContentView: View {
                 impactHeavy.impactOccurred()
             }
         }
-        .environmentObject(MainViewModel(topTextFieldValue: "0", bottomTextFieldValue: "0"))
+        .environmentObject(MainViewModel(topTextFieldValue: "\(topValue)", bottomTextFieldValue: "\(bottomValue)"))
     }
 }
 

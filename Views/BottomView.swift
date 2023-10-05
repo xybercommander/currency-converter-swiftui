@@ -10,6 +10,8 @@ import SwiftUI
 struct BottomView: View {
     @State var showBottomValueSheet = false
     @EnvironmentObject private var mainViewModel: MainViewModel
+    @Binding var topToBottom: Bool
+    @Binding var rotationAngle: Double
     
     var body: some View {
         VStack {
@@ -39,6 +41,8 @@ struct BottomView: View {
                             .foregroundStyle(Color(hex: AppColors.primaryColor))
                             .onTapGesture {
                                 showBottomValueSheet.toggle()
+                                topToBottom = false
+                                rotationAngle = 180
                             }
                             .sheet(isPresented: $showBottomValueSheet) {
                                 print("Bottom Value sheet dismissed")
@@ -64,6 +68,17 @@ struct BottomView: View {
     }
 }
 
-#Preview {
-    BottomView()
+struct BottomView_Preview: PreviewProvider {
+    static var previews: some View {
+        let a = Binding<Bool>(
+            get: { true },
+            set: { _ in }
+        )
+        let b = Binding<Double>(
+            get: { 0 },
+            set: { _ in }
+        )
+        return BottomView(topToBottom: a, rotationAngle: b)
+    }
 }
+

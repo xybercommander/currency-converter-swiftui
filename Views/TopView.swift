@@ -40,6 +40,8 @@ struct TopView: View {
                             .foregroundStyle(.white)
                             .onTapGesture {
                                 showTopValueSheet.toggle()
+                                topToBottom = true
+                                rotationAngle = 0
                             }
                             .sheet(isPresented: $showTopValueSheet) {
                                 print("Top Value sheet dismissed")
